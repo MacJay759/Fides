@@ -584,7 +584,7 @@ export default function Dashboard({
       {/* Main workspace section splitting charts & tables */}
       <section className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
         {/* Dynamic Vector Area Chart (Revenue growth) */}
-        <div className="lg:col-span-2 bg-[#0B0B0C] text-white border border-[#1E1E1F] rounded-[16px] pt-4 sm:pt-7 pb-3 sm:pb-4 px-0 sm:px-0 flex flex-col justify-between min-h-[320px] sm:min-h-[360px] relative overflow-hidden shadow-2xl">
+        <div className="lg:col-span-2 bg-gradient-to-br from-[#0B0B0C] to-[#0F0F11] text-white border border-[#1E1E1F] rounded-[16px] pt-4 sm:pt-7 pb-3 sm:pb-4 px-0 sm:px-0 flex flex-col justify-between min-h-[320px] sm:min-h-[360px] relative overflow-hidden shadow-2xl">
           {/* Header row (top of card) matching inspiration */}
           <div className="flex flex-col gap-1 select-none px-4 sm:px-6">
             <div className="flex items-center justify-between gap-3">
@@ -643,13 +643,15 @@ export default function Dashboard({
           </div>
 
           {/* SVG representation of beautifully curved line chart */}
-          <div className="h-[200px] sm:h-[260px] w-full relative mt-4 sm:mt-6 overflow-hidden flex-grow">
+          <div className="h-[200px] sm:h-[260px] w-full relative mt-4 sm:mt-6 overflow-hidden flex-grow -mx-4 sm:-mx-6">
             <svg viewBox="0 0 600 220" className="w-full h-full text-neutral-500 overflow-visible" preserveAspectRatio="none">
               <defs>
-                <linearGradient id="curve-gradient-accent" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#F97316" stopOpacity="0.3" />
-                  <stop offset="50%" stopColor="#F97316" stopOpacity="0.1" />
-                  <stop offset="100%" stopColor="#F97316" stopOpacity="0.00" />
+                <linearGradient id="curve-gradient-accent" x1="0" y1="0" x2="600" y2="0">
+                  <stop offset="0%" stopColor="#EC4899" stopOpacity="0.4" />
+                  <stop offset="25%" stopColor="#D946EF" stopOpacity="0.35" />
+                  <stop offset="50%" stopColor="#A855F7" stopOpacity="0.3" />
+                  <stop offset="75%" stopColor="#7C3AED" stopOpacity="0.25" />
+                  <stop offset="100%" stopColor="#3B82F6" stopOpacity="0.15" />
                 </linearGradient>
                 <filter id="glow">
                   <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
@@ -740,13 +742,13 @@ export default function Dashboard({
                       transition={{ duration: 0.5, ease: 'easeOut' }}
                     />
 
-                    {/* SVG main orange curve line */}
+                    {/* SVG main gradient curve line */}
                     <motion.path
                       key={`area-line-${selectedPeriod}`}
                       d={linePath}
                       fill="none"
-                      stroke="#F97316"
-                      strokeWidth="3"
+                      stroke="#A855F7"
+                      strokeWidth="2.5"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       filter="url(#glow)"
