@@ -392,7 +392,7 @@ export default function ClientManager({
                     </div>
                   )}
                   {activeSlideClient.notes && (
-                    <div className="bg-neutral-50 dark:bg-[#1A1A1A] p-2.5 rounded border border-neutral-100 dark:border-neutral-900 mt-1 italic">
+                    <div className="bg-neutral-50 dark:bg-[#1A1A1A] p-2.5 rounded border border-neutral-100 dark:border-neutral-900 mt-1">
                       Notes: {activeSlideClient.notes}
                     </div>
                   )}
@@ -431,7 +431,7 @@ export default function ClientManager({
                         </div>
                         <div className="flex flex-col items-end">
                           <span className="font-mono font-bold text-primary">{formatCurrencyValue(inv.total, inv.currency)}</span>
-                          <span className={`text-[9px] font-semibold italic ${
+                          <span className={`text-[9px] font-semibold ${
                             inv.status === 'paid' ? 'text-emerald-500' : inv.status === 'overdue' ? 'text-red-500 font-bold' : 'text-orange-400'
                           }`}>
                             {inv.status}
@@ -440,7 +440,7 @@ export default function ClientManager({
                       </div>
                     ))}
                     {inspectedClientInvoices.length === 0 && (
-                      <div className="text-center py-6 text-[11px] text-neutral-400 italic">
+                      <div className="text-center py-6 text-[11px] text-neutral-400">
                         No invoices compiled for this client profile.
                       </div>
                     )}

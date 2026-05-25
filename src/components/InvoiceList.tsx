@@ -374,7 +374,7 @@ export default function InvoiceList({
 
                       {/* Status badge */}
                       <td className="p-3 sm:p-4 text-center whitespace-nowrap">
-                        <span className={`px-2 sm:px-2.5 py-1 text-[10px] font-bold tracking-tight rounded-md select-none border lowercase italic ${
+                        <span className={`px-2 sm:px-2.5 py-1 text-[10px] font-bold tracking-tight rounded-md select-none border lowercase ${`
                           inv.status === 'paid'
                             ? 'bg-emerald-50 dark:bg-emerald-950/20 text-emerald-500 border-emerald-100 dark:border-emerald-950/40'
                             : isOverdue && inv.status !== 'paid'

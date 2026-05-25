@@ -584,9 +584,9 @@ export default function Dashboard({
       {/* Main workspace section splitting charts & tables */}
       <section className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
         {/* Dynamic Vector Area Chart (Revenue growth) */}
-        <div className="lg:col-span-2 bg-[#0B0B0C] text-white border border-[#1E1E1F] rounded-[16px] pt-4 sm:pt-7 pb-3 sm:pb-4 px-4 sm:px-6 flex flex-col justify-between min-h-[280px] sm:min-h-[320px] relative overflow-hidden shadow-2xl">
+        <div className="lg:col-span-2 bg-[#0B0B0C] text-white border border-[#1E1E1F] rounded-[16px] pt-4 sm:pt-7 pb-3 sm:pb-4 px-0 sm:px-0 flex flex-col justify-between min-h-[320px] sm:min-h-[360px] relative overflow-hidden shadow-2xl">
           {/* Header row (top of card) matching inspiration */}
-          <div className="flex flex-col gap-1 select-none">
+          <div className="flex flex-col gap-1 select-none px-4 sm:px-6">
             <div className="flex items-center justify-between gap-3">
               <span className="text-base sm:text-lg lg:text-[17px] font-semibold text-white tracking-tight font-sans">
                 Client Cash Receivables Trend
@@ -643,39 +643,47 @@ export default function Dashboard({
           </div>
 
           {/* SVG representation of beautifully curved line chart */}
-          <div className="h-[160px] sm:h-[210px] w-full relative mt-4 sm:mt-6 overflow-hidden">
-            <svg viewBox="0 0 600 200" className="w-full h-full text-neutral-500 overflow-visible">
+          <div className="h-[200px] sm:h-[260px] w-full relative mt-4 sm:mt-6 overflow-hidden flex-grow">
+            <svg viewBox="0 0 600 220" className="w-full h-full text-neutral-500 overflow-visible" preserveAspectRatio="none">
               <defs>
                 <linearGradient id="curve-gradient-accent" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#F97316" stopOpacity="0.25" />
+                  <stop offset="0%" stopColor="#F97316" stopOpacity="0.3" />
+                  <stop offset="50%" stopColor="#F97316" stopOpacity="0.1" />
                   <stop offset="100%" stopColor="#F97316" stopOpacity="0.00" />
                 </linearGradient>
+                <filter id="glow">
+                  <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+                  <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
               </defs>
  
               {/* Grid Lines background: Spanning fully across the grid canvas area, from 0 to 600 */}
-              {[30, 63.75, 97.5, 131.25, 165].map((yVal, i) => (
+              {[35, 75, 115, 155, 195].map((yVal, i) => (
                 <line 
                   key={i}
                   x1="0" 
                   y1={yVal} 
                   x2="600" 
                   y2={yVal} 
-                  className="stroke-[#222224]/50" 
+                  className="stroke-[#222224]/40" 
                   strokeWidth="1" 
-                  strokeDasharray="4 4"
+                  strokeDasharray="6 3"
                 />
               ))}
 
               {/* Ticks on Y-axis (placed beautifully floating above the lines) */}
-              {[30, 63.75, 97.5, 131.25, 165].map((yVal, i) => {
+              {[35, 75, 115, 155, 195].map((yVal, i) => {
                 const tickVal = chartData.maxVal * (1 - (i / 4));
                 return (
                   <text
                     key={i}
                     x="0"
-                    y={yVal - 6}
+                    y={yVal - 8}
                     textAnchor="start"
-                    className="fill-[#5F5F61] font-sans text-[11px] font-semibold select-none tracking-tight"
+                    className="fill-[#6F6F71] font-sans text-[10px] font-medium select-none tracking-tight"
                   >
                     {formatTickValue(tickVal)}
                   </text>
@@ -686,8 +694,8 @@ export default function Dashboard({
               {(() => {
                 const startX = 0;
                 const endX = 600;
-                const chartHeight = 135;
-                const bottomY = 165;
+                const chartHeight = 155;
+                const bottomY = 195;
                 
                 const numMonths = chartData.months.length;
                 const denominator = numMonths > 1 ? numMonths - 1 : 1;
@@ -738,11 +746,13 @@ export default function Dashboard({
                       d={linePath}
                       fill="none"
                       stroke="#F97316"
-                      strokeWidth="2.5"
+                      strokeWidth="3"
                       strokeLinecap="round"
-                      initial={{ pathLength: 0 }}
-                      animate={{ pathLength: 1 }}
-                      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                      strokeLinejoin="round"
+                      filter="url(#glow)"
+                      initial={{ pathLength: 0, opacity: 0 }}
+                      animate={{ pathLength: 1, opacity: 1 }}
+                      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                     />
 
                     {/* Interactive highlight dotted vertical lines & selector target dots */}
@@ -952,12 +962,7 @@ export default function Dashboard({
             </div>
           </div>
 
-          <button
-            onClick={openNewInvoice}
-            className="w-full h-[36px] mt-4 bg-transparent border border-neutral-200 dark:border-[#2A2A2A] text-neutral-500 dark:text-[#888888] text-[13px] font-medium rounded-lg cursor-pointer transition-all duration-150 select-none flex items-center justify-center gap-1.5 hover:bg-neutral-50 dark:hover:bg-[#161616] hover:border-neutral-300 dark:hover:border-[#3A3A3A] hover:text-neutral-900 dark:hover:text-[#F5F5F5]"
-          >
-            <span>+ Draft Retainer Invoice</span>
-          </button>
+
         </div>
       </section>
 
@@ -1164,7 +1169,7 @@ export default function Dashboard({
                         {formatCurrencyValue(inv.total, inv.currency)}
                       </td>
                       <td className="p-4 whitespace-nowrap">
-                        <span className={`px-2 py-0.5 text-[10px] font-semibold tracking-tight rounded-md select-none lowercase italic text-center ${
+                        <span className={`px-2 py-0.5 text-[10px] font-semibold tracking-tight rounded-md select-none lowercase text-center ${
                           inv.status === 'paid'
                             ? 'bg-emerald-50 dark:bg-emerald-950/20 text-emerald-500 border border-emerald-100 dark:border-emerald-950/40 badge-paid'
                             : inv.status === 'overdue'

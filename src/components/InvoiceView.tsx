@@ -243,7 +243,7 @@ ${invoice.from.email}`;
               </h1>
               
               {/* Dynamic Status Badges */}
-              <span className={`px-2 py-0.5 text-[10px] font-semibold tracking-tight rounded bg-emerald-50 dark:bg-emerald-950/20 text-emerald-500 border border-emerald-100 dark:border-emerald-950/40 select-none lowercase italic text-center text-body flex-shrink-0`}>
+              <span className={`px-2 py-0.5 text-[10px] font-semibold tracking-tight rounded bg-emerald-50 dark:bg-emerald-950/20 text-emerald-500 border border-emerald-100 dark:border-emerald-950/40 select-none lowercase text-center text-body flex-shrink-0`}>
                 {invoice.status}
               </span>
             </div>

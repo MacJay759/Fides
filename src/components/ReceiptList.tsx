@@ -177,7 +177,7 @@ export default function ReceiptList({
             />
           </div>
 
-          <span className="text-[11px] text-[#9B9B9B] font-semibold italic">
+          <span className="text-[11px] text-[#9B9B9B] font-semibold">
             List matches {filteredReceipts.length} transactions
           </span>
         </div>
@@ -354,7 +354,7 @@ export default function ReceiptList({
                   </div>
 
                   {activeReceipt.notes && (
-                    <div className="mt-4 pt-3 border-t border-neutral-100 dark:border-neutral-900/50 text-[10px] text-[#9B9B9B] italic leading-normal">
+                    <div className="mt-4 pt-3 border-t border-neutral-100 dark:border-neutral-900/50 text-[10px] text-[#9B9B9B] leading-normal">
                       Note: {activeReceipt.notes}
                     </div>
                   )}

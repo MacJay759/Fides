@@ -102,7 +102,7 @@ export default function Navbar({
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-[#EBEBEB] dark:border-[#1E1E1E] bg-white/95 dark:bg-[#0A0A0A]/95 backdrop-blur-md transition-colors duration-300 select-none">
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 h-16 flex items-center justify-between md:grid md:grid-cols-3">
+      <div className="px-3 sm:px-4 lg:px-8 h-16 flex items-center justify-between md:grid md:grid-cols-3">
         
         {/* Left: Brand Identity */}
         <div className="flex items-center gap-2 cursor-pointer md:col-span-1 justify-self-start min-w-0" onClick={() => setActiveTab('dashboard')}>
