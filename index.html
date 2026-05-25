@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fides — Premium Receipt & Invoice Generator</title>
+    <!-- Prevent Uncaught TypeError: Cannot redefine property: ethereum (browser/extension sandbox conflict) -->
+    <script>
+      (function() {
+        try {
+          const originalDefineProperty = Object.defineProperty;
+          Object.defineProperty = function(obj, prop, descriptor) {
+            if (prop === 'ethereum' && descriptor) {
+              descriptor.configurable = true;
+              try {
+                return originalDefineProperty(obj, prop, descriptor);
+              } catch (e) {
+                console.warn('Prevented fatal ethereum redefinition error:', e);
+                try {
+                  if ('value' in descriptor) {
+                    obj[prop] = descriptor.value;
+                  }
+                } catch (innerErr) {}
+                return obj;
+              }
+            }
+            return originalDefineProperty(obj, prop, descriptor);
+          };
+
+          const originalDefineProperties = Object.defineProperties;
+          Object.defineProperties = function(obj, properties) {
+            if (properties && 'ethereum' in properties && properties.ethereum) {
+              try {
+                properties.ethereum.configurable = true;
+              } catch (err) {}
+            }
+            try {
+              return originalDefineProperties(obj, properties);
+            } catch (e) {
+              console.warn('Prevented fatal ethereum defineProperties error:', e);
+              return obj;
+            }
+          };
+        } catch (err) {
+          console.error('Error initializing ethereum override boundary:', err);
+        }
+      })();
+    </script>
+    <!-- Preemptive Theme Application -->
+    <script>
+      try {
+        const theme = localStorage.getItem('fides_theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-white dark:bg-[#0A0A0A] text-[#0A0A0A] dark:text-[#F5F5F5] antialiased">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

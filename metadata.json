@@ -1,0 +1,6 @@
+{
+  "name": "Receipt & Invoice Generator",
+  "description": "A premium, professional receipt and invoice generator with live side-by-side preview, automatic status tracking, client management, and PDF exports.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

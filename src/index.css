@@ -1,0 +1,215 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'Geist Mono', 'Courier New', monospace;
+  
+  --color-orange-50: #FFF7ED;
+  --color-orange-100: #FFEDD5;
+  --color-orange-200: #FED7AA;
+  --color-orange-400: #FB923C;
+  --color-orange-500: #F97316;
+  --color-orange-600: #EA580C;
+  --color-orange-700: #C2410C;
+}
+
+:root {
+  /* Spacing aliases */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-7: 28px;
+  --sp-8: 32px;
+  
+  /* Radii */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 12px;
+
+  /* CSS custom variables for state mapping (Light theme) */
+  --bg-page: #FFFFFF;
+  --bg-sidebar: #F7F7F7;
+  --bg-surface: #F7F7F7;
+  --bg-subtle: #F0F0F0;
+
+  --border-default: #EBEBEB;
+  --border-strong: #D0D0D0;
+  --border-focus: #F97316;
+
+  --text-primary: #0A0A0A;
+  --text-secondary: #6B6B6B;
+  --text-tertiary: #9B9B9B;
+
+  /* Status Badge Colors (Light) */
+  --status-draft-bg: #F5F5F5;
+  --status-draft-text: #737373;
+  --status-draft-border: #E5E5E5;
+
+  --status-sent-bg: #F0F4FF;
+  --status-sent-text: #3B6FD4;
+  --status-sent-border: #DBEAFE;
+
+  --status-viewed-bg: #F5F2FF;
+  --status-viewed-text: #7C5CBF;
+  --status-viewed-border: #E9D5FF;
+
+  --status-overdue-bg: #FFF1F2;
+  --status-overdue-text: #D94F5C;
+  --status-overdue-border: #FECDD3;
+
+  --status-paid-bg: #F0FBF5;
+  --status-paid-text: #2D8A5E;
+  --status-paid-border: #BBF7D0;
+
+  --status-void-bg: #FEFCE8;
+  --status-void-text: #A16207;
+  --status-void-border: #FEF08A;
+
+  --status-partial-bg: #F0FAFA;
+  --status-partial-text: #0D7A7A;
+  --status-partial-border: #99F6E4;
+
+  --color-success: #2D8A5E;
+  --color-warning: #A16207;
+  --color-danger: #D94F5C;
+  --color-info: #3B6FD4;
+}
+
+.dark {
+  /* Dark theme overrides */
+  --bg-page: #0A0A0A;
+  --bg-sidebar: #080808;
+  --bg-surface: #111111;
+  --bg-subtle: #161616;
+
+  --border-default: #1E1E1E;
+  --border-strong: #2A2A2A;
+  --border-focus: #F97316;
+
+  --text-primary: #F5F5F5;
+  --text-secondary: #888888;
+  --text-tertiary: #555555;
+
+  /* Status Badge Colors (Dark) */
+  --status-draft-bg: #1A1A1A;
+  --status-draft-text: #888888;
+  --status-draft-border: #2A2A2A;
+
+  --status-sent-bg: #0D1526;
+  --status-sent-text: #6B9FE4;
+  --status-sent-border: #1E3A5F;
+
+  --status-viewed-bg: #140D26;
+  --status-viewed-text: #A78BDB;
+  --status-viewed-border: #2D1A4F;
+
+  --status-overdue-bg: #200A0D;
+  --status-overdue-text: #F08090;
+  --status-overdue-border: #4A1520;
+
+  --status-paid-bg: #091A12;
+  --status-paid-text: #4CB87A;
+  --status-paid-border: #14472E;
+
+  --status-void-bg: #1A1500;
+  --status-void-text: #D4A030;
+  --status-void-border: #3D2F00;
+
+  --status-partial-bg: #091818;
+  --status-partial-text: #2EBDBD;
+  --status-partial-border: #0D3535;
+}
+
+/* Base resets and application layout variables */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  background: var(--bg-page);
+  margin: 0;
+  padding: 0;
+}
+
+/* STRICT RULE: DO NOT use shadow. Remove shadows globally to follow the Fides specification */
+* {
+  box-shadow: none !important;
+}
+
+/* Scrollbars - minimal */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-default);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-strong);
+}
+
+/* Focus styles matching the spec */
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--color-orange-500) !important;
+}
+
+/* Custom transitions and utility animations */
+.transition-fides {
+  transition: all 120ms ease-out;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Dynamic overdue pulse animation */
+@keyframes overdue-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.animate-pulse-subtle {
+  animation: overdue-pulse 2.5s ease-in-out infinite;
+}
+
+/* Shimmer Skeleton */
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(90deg, var(--bg-subtle) 25%, var(--bg-surface) 50%, var(--bg-subtle) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite;
+}
+
+/* Printable PDF Styling elements */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #print-target-node, #print-target-node * {
+    visibility: visible;
+  }
+  #print-target-node {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+}
