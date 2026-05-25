@@ -196,6 +196,56 @@ input:focus, select:focus, textarea:focus {
   animation: shimmer 1.6s infinite;
 }
 
+/* Mobile Responsive Utilities */
+@media (max-width: 640px) {
+  /* Ensure minimum touch target size for mobile */
+  button, input, select, textarea {
+    min-height: 44px;
+  }
+  
+  /* Better text sizing for mobile */
+  body {
+    font-size: 16px; /* prevents zoom on input focus */
+  }
+  
+  /* Improved spacing for mobile screens */
+  main {
+    padding: var(--sp-4) !important;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  /* Tablet optimizations */
+  main {
+    padding: var(--sp-6) !important;
+  }
+}
+
+/* Better scroll behavior on mobile */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Mobile-first responsive containers */
+.responsive-container {
+  width: 100%;
+  padding: 0 var(--sp-4);
+}
+
+@media (min-width: 640px) {
+  .responsive-container {
+    padding: 0 var(--sp-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 var(--sp-8);
+  }
+}
+
 /* Printable PDF Styling elements */
 @media print {
   body * {

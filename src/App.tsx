@@ -311,7 +311,7 @@ export default function App() {
       <div className="flex-grow flex flex-col min-w-0 overflow-y-auto">
         
         {/* Dynamic workspace context route router rendering */}
-        <main className="flex-1 p-4 md:p-8 scroll-smooth z-10 relative">
+        <main className="flex-1 p-3 sm:p-4 lg:p-8 scroll-smooth z-10 relative">
           <div className="max-w-7xl mx-auto w-full h-full">
             
             <AnimatePresence mode="wait">

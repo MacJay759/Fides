@@ -327,12 +327,12 @@ export default function InvoiceList({
             <table className="w-full text-left text-xs">
               <thead>
                 <tr className="border-b border-[#EBEBEB] dark:border-[#1E1E1E] bg-[#F7F7F7]/50 dark:bg-[#070707]/30 text-secondary font-bold uppercase tracking-wider text-[10px]">
-                  <th className="p-4 font-bold">Bill No</th>
-                  <th className="p-4 font-bold">Client Recipient</th>
-                  <th className="p-4 font-bold">Issue/Due Date</th>
-                  <th className="p-4 font-bold text-right">Invoice Sum</th>
-                  <th className="p-4 font-bold text-center">Status Badge</th>
-                  <th className="p-4 font-bold text-right">Actions</th>
+                  <th className="p-3 sm:p-4 font-bold">Bill No</th>
+                  <th className="p-3 sm:p-4 font-bold hidden sm:table-cell">Client</th>
+                  <th className="p-3 sm:p-4 font-bold hidden md:table-cell">Date</th>
+                  <th className="p-3 sm:p-4 font-bold text-right hidden lg:table-cell">Amount</th>
+                  <th className="p-3 sm:p-4 font-bold text-center">Status</th>
+                  <th className="p-3 sm:p-4 font-bold text-right">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#EBEBEB] dark:divide-[#1E1E1E]">
@@ -343,37 +343,38 @@ export default function InvoiceList({
                     <tr
                       key={inv.id}
                       onClick={() => onSelectInvoice(inv.id)}
-                      className="hover:bg-[#F7F7F7]/80 dark:hover:bg-[#161616]/80 cursor-pointer transition-colors duration-150 group"
+                      className="hover:bg-[#F7F7F7]/80 dark:hover:bg-[#161616]/80 cursor-pointer transition-colors duration-150 group text-xs sm:text-sm"
                     >
                       {/* Bill No */}
-                      <td className="p-4 font-mono font-bold text-primary group-hover:text-orange-500 transition-colors">
-                        {inv.number}
+                      <td className="p-3 sm:p-4 font-mono font-bold text-primary group-hover:text-orange-500 transition-colors">
+                        <div className="truncate max-w-[80px] sm:max-w-none">{inv.number}</div>
+                        <div className="sm:hidden text-[10px] text-secondary mt-0.5">{inv.client.name}</div>
                       </td>
                       
-                      {/* Client recipient */}
-                      <td className="p-4">
+                      {/* Client recipient - hidden on mobile */}
+                      <td className="p-3 sm:p-4 hidden sm:table-cell">
                         <div className="flex flex-col">
-                          <span className="font-bold text-[#0A0A0A] dark:text-[#F5F5F5]">{inv.client.name}</span>
-                          <span className="text-[10px] text-secondary font-mono mt-0.5">{inv.client.email}</span>
+                          <span className="font-bold text-[#0A0A0A] dark:text-[#F5F5F5] truncate">{inv.client.name}</span>
+                          <span className="text-[10px] text-secondary font-mono mt-0.5 truncate">{inv.client.email}</span>
                         </div>
                       </td>
 
-                      {/* Issue/Due date */}
-                      <td className="p-4">
-                        <div className="flex flex-col gap-0.5 text-secondary">
+                      {/* Issue/Due date - hidden on mobile */}
+                      <td className="p-3 sm:p-4 hidden md:table-cell">
+                        <div className="flex flex-col gap-0.5 text-secondary text-xs">
                           <span className="font-mono">{formatDate(inv.invoiceDate)}</span>
                           <span className="text-[10px] font-mono font-semibold text-neutral-400">Due: {formatDate(inv.dueDate)}</span>
                         </div>
                       </td>
 
-                      {/* Invoice Sum */}
-                      <td className="p-4 font-mono font-bold text-right text-primary text-sm">
+                      {/* Invoice Sum - hidden on lg screens */}
+                      <td className="p-3 sm:p-4 font-mono font-bold text-right text-primary text-sm hidden lg:table-cell">
                         {formatCurrencyValue(inv.total, inv.currency)}
                       </td>
 
                       {/* Status badge */}
-                      <td className="p-4 text-center whitespace-nowrap">
-                        <span className={`px-2.5 py-1 text-[10px] font-bold tracking-tight rounded-md select-none border lowercase italic ${
+                      <td className="p-3 sm:p-4 text-center whitespace-nowrap">
+                        <span className={`px-2 sm:px-2.5 py-1 text-[10px] font-bold tracking-tight rounded-md select-none border lowercase italic ${
                           inv.status === 'paid'
                             ? 'bg-emerald-50 dark:bg-emerald-950/20 text-emerald-500 border-emerald-100 dark:border-emerald-950/40'
                             : isOverdue && inv.status !== 'paid'
@@ -387,36 +388,39 @@ export default function InvoiceList({
                       </td>
 
                       {/* Quick Actions row button list */}
-                      <td className="p-4 whitespace-nowrap text-right">
-                        <div className="flex items-center justify-end gap-2" onClick={e => e.stopPropagation()}>
+                      <td className="p-3 sm:p-4 whitespace-nowrap text-right">
+                        <div className="flex items-center justify-end gap-1 sm:gap-2" onClick={e => e.stopPropagation()}>
                           
                           {/* Inspect Detail */}
                           <button
                             onClick={() => onSelectInvoice(inv.id)}
-                            className="p-1 text-secondary hover:text-orange-500 hover:bg-neutral-50 dark:hover:bg-[#1F1F1F] rounded-md transition-colors border border-transparent hover:border-[#EBEBEB]"
+                            className="p-1.5 sm:p-1 text-secondary hover:text-orange-500 hover:bg-neutral-50 dark:hover:bg-[#1F1F1F] rounded-md transition-colors border border-transparent hover:border-[#EBEBEB] h-8 w-8 sm:h-auto sm:w-auto flex items-center justify-center"
                             title="Inspect Details"
                           >
-                            <ChevronRight size={14} />
+                            <ChevronRight size={16} className="sm:hidden" />
+                            <ChevronRight size={14} className="hidden sm:block" />
                           </button>
 
                           {/* Edit Invoice (Draft only) */}
                           {inv.status === 'draft' && (
                             <button
                               onClick={() => onEditInvoice(inv)}
-                              className="p-1 text-secondary hover:text-orange-500 hover:bg-neutral-50 dark:hover:bg-[#1F1F1F] rounded-md transition-colors border border-transparent hover:border-[#EBEBEB]"
+                              className="p-1.5 sm:p-1 text-secondary hover:text-orange-500 hover:bg-neutral-50 dark:hover:bg-[#1F1F1F] rounded-md transition-colors border border-transparent hover:border-[#EBEBEB] h-8 w-8 sm:h-auto sm:w-auto flex items-center justify-center"
                               title="Edit Draft"
                             >
-                              <Edit2 size={13} />
+                              <Edit2 size={16} className="sm:hidden" />
+                              <Edit2 size={13} className="hidden sm:block" />
                             </button>
                           )}
 
                           {/* Delete profile */}
                           <button
                             onClick={(e) => handleConfirmDelete(e, inv.id, inv.number)}
-                            className="p-1 text-secondary hover:text-red-500 hover:bg-neutral-50 dark:hover:bg-[#1F1F1F] rounded-md transition-colors border border-transparent hover:border-[#EBEBEB]"
-                            title="Delete Invoice Archive"
+                            className="p-1.5 sm:p-1 text-secondary hover:text-red-500 hover:bg-neutral-50 dark:hover:bg-[#1F1F1F] rounded-md transition-colors border border-transparent hover:border-[#EBEBEB] h-8 w-8 sm:h-auto sm:w-auto flex items-center justify-center"
+                            title="Delete Invoice"
                           >
-                            <Trash2 size={13} />
+                            <Trash2 size={16} className="sm:hidden" />
+                            <Trash2 size={13} className="hidden sm:block" />
                           </button>
                         </div>
                       </td>
@@ -426,7 +430,7 @@ export default function InvoiceList({
 
                 {processedInvoices.length === 0 && (
                   <tr>
-                    <td colSpan={6} className="p-16 text-center text-xs text-neutral-400 select-none">
+                    <td colSpan={6} className="p-8 sm:p-16 text-center text-xs text-neutral-400 select-none">
                       No invoices found under specified filter conditions.
                     </td>
                   </tr>

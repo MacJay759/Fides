@@ -102,14 +102,14 @@ export default function Navbar({
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-[#EBEBEB] dark:border-[#1E1E1E] bg-white/95 dark:bg-[#0A0A0A]/95 backdrop-blur-md transition-colors duration-300 select-none">
-      <div className="max-w-7xl mx-auto px-0 h-16 flex items-center justify-between md:grid md:grid-cols-3">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 h-16 flex items-center justify-between md:grid md:grid-cols-3">
         
         {/* Left: Brand Identity */}
-        <div className="flex items-center gap-2 cursor-pointer md:col-span-1 justify-self-start" onClick={() => setActiveTab('dashboard')}>
-          <div className="w-8 h-8 bg-orange-500 rounded-md flex items-center justify-center text-white font-bold text-sm transition-transform hover:scale-105 active:scale-95 duration-150">
+        <div className="flex items-center gap-2 cursor-pointer md:col-span-1 justify-self-start min-w-0" onClick={() => setActiveTab('dashboard')}>
+          <div className="w-8 h-8 bg-orange-500 rounded-md flex items-center justify-center text-white font-bold text-sm transition-transform hover:scale-105 active:scale-95 duration-150 flex-shrink-0">
             F
           </div>
-          <span className="text-sm font-bold tracking-tight text-[#0A0A0A] dark:text-[#F5F5F5] font-sans">
+          <span className="text-xs sm:text-sm font-bold tracking-tight text-[#0A0A0A] dark:text-[#F5F5F5] font-sans truncate">
             Fides Billing
           </span>
         </div>
@@ -144,17 +144,6 @@ export default function Navbar({
         {/* Right: Actions, Alerts, Profile & Theme */}
         <div className="hidden md:flex items-center justify-end gap-4 md:col-span-1">
           
-          {/* Create Invoice button */}
-          {activeTab !== 'dashboard' && (
-            <button
-              onClick={openNewInvoice}
-              className="h-9 px-3 bg-orange-500 hover:bg-orange-600 active:transform active:scale-95 text-white text-xs font-semibold rounded-lg flex items-center gap-1.5 cursor-pointer select-none transition-all duration-150"
-            >
-              <Plus size={14} />
-              <span>Invoice</span>
-            </button>
-          )}
-
           {/* Notifications Bell Alert */}
           <div ref={notifyRef} className="relative">
             <button
@@ -250,13 +239,13 @@ export default function Navbar({
         </div>
 
         {/* Mobile controls: Burger trigger & small logos */}
-        <div className="flex md:hidden items-center gap-3">
+        <div className="flex md:hidden items-center gap-2">
           {/* Burger menu button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-1.5 bg-neutral-50 hover:bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-md text-[#0A0A0A] dark:text-white cursor-pointer"
+            className="p-2 h-10 w-10 bg-neutral-50 hover:bg-neutral-100 dark:bg-neutral-900 dark:hover:bg-neutral-800 border border-neutral-200 dark:border-neutral-800 rounded-md text-[#0A0A0A] dark:text-white cursor-pointer transition-colors flex items-center justify-center"
           >
-            {mobileMenuOpen ? <X size={16} /> : <Menu size={16} />}
+            {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
 
@@ -264,13 +253,13 @@ export default function Navbar({
 
       {/* Slide-out Mobile Navigation (Standard styled Drawer) */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-[#EBEBEB] dark:border-[#1E1E1E] bg-white dark:bg-[#0A0A0A] p-4 flex flex-col gap-3 py-6 relative z-50">
-          <div className="flex flex-col gap-1.5 text-xs font-semibold tracking-tight">
+        <div className="md:hidden border-t border-[#EBEBEB] dark:border-[#1E1E1E] bg-white dark:bg-[#0A0A0A] p-3 sm:p-4 flex flex-col gap-3 py-4 sm:py-6 relative z-50 max-h-[calc(100vh-64px)] overflow-y-auto">
+          <div className="flex flex-col gap-1 text-xs sm:text-sm font-semibold tracking-tight">
             {[
               { id: 'dashboard', label: 'Dashboard', icon: Grid2X2 },
-              { id: 'invoices', label: 'Invoices registry', icon: Receipt },
-              { id: 'receipts', label: 'Receipt folders', icon: Receipt },
-              { id: 'clients', label: 'Saved Customers', icon: Users },
+              { id: 'invoices', label: 'Invoices', icon: Receipt },
+              { id: 'receipts', label: 'Receipts', icon: Receipt },
+              { id: 'clients', label: 'Clients', icon: Users },
             ].map((sub) => {
               const isActive = activeTab === sub.id;
               const Icon = sub.icon;
@@ -281,30 +270,40 @@ export default function Navbar({
                     setActiveTab(sub.id);
                     setMobileMenuOpen(false);
                   }}
-                  className={`p-3.5 hover:bg-neutral-50 dark:hover:bg-[#111111] rounded-lg text-left flex items-center gap-3.5 cursor-pointer font-semibold transition-all ${
+                  className={`p-3 sm:p-3.5 hover:bg-neutral-50 dark:hover:bg-[#111111] rounded-lg text-left flex items-center gap-3 cursor-pointer font-semibold transition-all min-h-[44px] ${
                     isActive ? 'bg-orange-50/50 dark:bg-orange-500/5 text-orange-500' : 'text-[#6B6B6B] dark:text-[#888888]'
                   }`}
                 >
-                  <Icon size={14} />
+                  <Icon size={16} className="flex-shrink-0" />
                   <span>{sub.label}</span>
                 </button>
               );
             })}
           </div>
 
-          <div className="h-[1px] bg-[#EBEBEB] dark:bg-[#1E1E1E] my-2" />
+          <div className="h-[1px] bg-[#EBEBEB] dark:bg-[#1E1E1E] my-1 sm:my-2" />
 
           {/* Quick Creator */}
-          <div className="flex flex-col text-xs">
+          <div className="flex flex-col text-xs sm:text-sm gap-2">
             <button
               onClick={() => {
                 openNewInvoice();
                 setMobileMenuOpen(false);
               }}
-              className="bg-orange-500 text-white rounded-lg p-3 flex items-center justify-center gap-1 font-bold w-full"
+              className="bg-orange-500 hover:bg-orange-600 text-white rounded-lg p-3 sm:p-3.5 flex items-center justify-center gap-2 font-bold w-full min-h-[44px]"
             >
-              <Plus size={12} />
+              <Plus size={14} />
               <span>Create Invoice</span>
+            </button>
+            <button
+              onClick={() => {
+                setActiveTab('settings');
+                setMobileMenuOpen(false);
+              }}
+              className="bg-neutral-100 dark:bg-[#111111] hover:bg-neutral-200 dark:hover:bg-[#1A1A1A] text-[#0A0A0A] dark:text-[#F5F5F5] rounded-lg p-3 sm:p-3.5 flex items-center justify-center gap-2 font-semibold w-full min-h-[44px]"
+            >
+              <SettingsIcon size={14} />
+              <span>Settings</span>
             </button>
           </div>
 
@@ -313,10 +312,10 @@ export default function Navbar({
               onLogout();
               setMobileMenuOpen(false);
             }}
-            className="p-3.5 hover:bg-red-50 text-red-500 rounded-lg text-left flex items-center gap-3.5 cursor-pointer text-xs font-bold"
+            className="p-3 sm:p-3.5 hover:bg-red-50 dark:hover:bg-red-950/10 text-red-500 rounded-lg text-left flex items-center gap-3 cursor-pointer text-xs sm:text-sm font-bold min-h-[44px]"
           >
-            <LogOut size={13} />
-            <span>Log out session</span>
+            <LogOut size={14} className="flex-shrink-0" />
+            <span>Log out</span>
           </button>
         </div>
       )}

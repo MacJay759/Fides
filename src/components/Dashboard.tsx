@@ -488,12 +488,12 @@ export default function Dashboard({
   };
 
   return (
-    <div className="flex flex-col gap-8 select-none">
+    <div className="flex flex-col gap-6 sm:gap-8 select-none">
       
       {/* Header Greeting & Create Invoice Action Row */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-transparent pb-1">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 border-b border-transparent pb-1">
         <div className="font-sans">
-          <h1 className="text-[24px] sm:text-[28px] font-bold tracking-tight text-[#0A0A0A] dark:text-[#F5F5F5]">
+          <h1 className="text-xl sm:text-2xl lg:text-[28px] font-bold tracking-tight text-[#0A0A0A] dark:text-[#F5F5F5]">
             {getGreeting()}, {getUserFirstName()}.
           </h1>
           <p className="text-xs sm:text-sm text-neutral-500 dark:text-[#888888] mt-1 font-medium">
@@ -503,7 +503,7 @@ export default function Dashboard({
         
         <button
           onClick={openNewInvoice}
-          className="shrink-0 flex items-center justify-center gap-1.5 bg-orange-500 hover:bg-orange-600 active:scale-95 duration-100 text-white text-xs font-bold px-4 py-2.5 rounded-lg cursor-pointer h-10 select-none shadow-xs"
+          className="shrink-0 flex items-center justify-center gap-1.5 bg-orange-500 hover:bg-orange-600 active:scale-95 duration-100 text-white text-xs font-bold px-3 sm:px-4 py-2.5 rounded-lg cursor-pointer h-10 sm:h-10 select-none shadow-xs"
         >
           <Plus size={14} />
           <span>New invoice</span>
@@ -514,7 +514,7 @@ export default function Dashboard({
       <section className="bg-white dark:bg-[#0A0A0A] border border-[#EBEBEB] dark:border-[#1F1F1F] rounded-[12px] overflow-hidden grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#EBEBEB] dark:divide-[#1F1F1F]">
         
         {/* CARD 1 — Outstanding Amount */}
-        <div className="p-5 md:p-6 flex flex-col justify-between min-h-[110px] bg-transparent hover:bg-neutral-50 dark:hover:bg-[#111111]/30 transition-all duration-150 ease-in-out cursor-default">
+        <div className="p-4 sm:p-5 md:p-6 flex flex-col justify-between min-h-[100px] sm:min-h-[110px] bg-transparent hover:bg-neutral-50 dark:hover:bg-[#111111]/30 transition-all duration-150 ease-in-out cursor-default">
           <div className="flex items-center justify-between w-full">
             <span className="text-[10px] font-bold tracking-wider text-neutral-400 dark:text-[#888888] uppercase font-sans">
               Outstanding Amount
@@ -524,7 +524,7 @@ export default function Dashboard({
             </div>
           </div>
           <div className="mt-2.5">
-            <span className="font-sans text-[24px] md:text-[28px] font-bold text-[#0A0A0A] dark:text-white tracking-tight leading-none">
+            <span className="font-sans text-xl sm:text-2xl md:text-[28px] font-bold text-[#0A0A0A] dark:text-white tracking-tight leading-none">
               {formatCurrencyCompact(stats.awaitingPaymentTotal + stats.overdueTotal)}
             </span>
             <p className="text-xs text-neutral-500 dark:text-[#666666] font-medium mt-1 leading-none">
@@ -534,7 +534,7 @@ export default function Dashboard({
         </div>
 
         {/* CARD 2 — Received (Month) */}
-        <div className="p-5 md:p-6 flex flex-col justify-between min-h-[110px] bg-transparent hover:bg-neutral-50 dark:hover:bg-[#111111]/30 transition-all duration-150 ease-in-out cursor-default">
+        <div className="p-4 sm:p-5 md:p-6 flex flex-col justify-between min-h-[100px] sm:min-h-[110px] bg-transparent hover:bg-neutral-50 dark:hover:bg-[#111111]/30 transition-all duration-150 ease-in-out cursor-default">
           <div className="flex items-center justify-between w-full">
             <span className="text-[10px] font-bold tracking-wider text-neutral-400 dark:text-[#888888] uppercase font-sans">
               Received ({getCurrentMonthNameUpper()})
@@ -544,7 +544,7 @@ export default function Dashboard({
             </div>
           </div>
           <div className="mt-2.5">
-            <span className="font-sans text-[24px] md:text-[28px] font-semibold text-emerald-600 dark:text-[#10B981] tracking-tight leading-none">
+            <span className="font-sans text-xl sm:text-2xl md:text-[28px] font-semibold text-emerald-600 dark:text-[#10B981] tracking-tight leading-none">
               {formatCurrencyCompact(stats.receivedThisMonth)}
             </span>
             <p className="text-xs text-neutral-500 dark:text-[#666666] font-medium mt-1 leading-none">
@@ -560,7 +560,7 @@ export default function Dashboard({
         </div>
 
         {/* CARD 3 — Active Clients */}
-        <div className="p-5 md:p-6 flex flex-col justify-between min-h-[110px] bg-transparent hover:bg-neutral-50 dark:hover:bg-[#111111]/30 transition-all duration-150 ease-in-out cursor-default">
+        <div className="p-4 sm:p-5 md:p-6 flex flex-col justify-between min-h-[100px] sm:min-h-[110px] bg-transparent hover:bg-neutral-50 dark:hover:bg-[#111111]/30 transition-all duration-150 ease-in-out cursor-default">
           <div className="flex items-center justify-between w-full">
             <span className="text-[10px] font-bold tracking-wider text-neutral-400 dark:text-[#888888] uppercase font-sans">
               Active Clients
@@ -570,7 +570,7 @@ export default function Dashboard({
             </div>
           </div>
           <div className="mt-2.5">
-            <span className="font-sans text-[24px] md:text-[28px] font-bold text-[#0A0A0A] dark:text-white tracking-tight leading-none">
+            <span className="font-sans text-xl sm:text-2xl md:text-[28px] font-bold text-[#0A0A0A] dark:text-white tracking-tight leading-none">
               {clients.length}
             </span>
             <p className="text-xs text-neutral-500 dark:text-[#666666] font-medium mt-1 leading-none">
@@ -582,13 +582,13 @@ export default function Dashboard({
       </section>
 
       {/* Main workspace section splitting charts & tables */}
-      <section className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+      <section className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
         {/* Dynamic Vector Area Chart (Revenue growth) */}
-        <div className="xl:col-span-2 bg-[#0B0B0C] text-white border border-[#1E1E1F] rounded-[16px] pt-7 pb-4 px-6 flex flex-col justify-between min-h-[320px] relative overflow-hidden shadow-2xl">
+        <div className="lg:col-span-2 bg-[#0B0B0C] text-white border border-[#1E1E1F] rounded-[16px] pt-4 sm:pt-7 pb-3 sm:pb-4 px-4 sm:px-6 flex flex-col justify-between min-h-[280px] sm:min-h-[320px] relative overflow-hidden shadow-2xl">
           {/* Header row (top of card) matching inspiration */}
           <div className="flex flex-col gap-1 select-none">
-            <div className="flex items-center justify-between">
-              <span className="text-[17px] font-semibold text-white tracking-tight font-sans">
+            <div className="flex items-center justify-between gap-3">
+              <span className="text-base sm:text-lg lg:text-[17px] font-semibold text-white tracking-tight font-sans">
                 Client Cash Receivables Trend
               </span>
               
@@ -596,12 +596,15 @@ export default function Dashboard({
               <div className="relative">
                 <button
                   onClick={() => setShowPeriodDropdown(!showPeriodDropdown)}
-                  className="h-8 px-3 bg-[#161617] hover:bg-[#202022] border border-[#2D2D2F] rounded-lg text-xs font-semibold text-neutral-300 transition-all duration-150 flex items-center gap-1.5 cursor-pointer"
+                  className="h-8 px-2 sm:px-3 bg-[#161617] hover:bg-[#202022] border border-[#2D2D2F] rounded-lg text-xs font-semibold text-neutral-300 transition-all duration-150 flex items-center gap-1.5 cursor-pointer whitespace-nowrap"
                 >
-                  <span className="capitalize">
+                  <span className="capitalize hidden sm:inline">
                     {selectedPeriod}
                   </span>
-                  <ChevronDown size={12} className="text-[#88888A]" />
+                  <span className="capitalize sm:hidden">
+                    {selectedPeriod.substring(0, 3)}
+                  </span>
+                  <ChevronDown size={12} className="text-[#88888A] flex-shrink-0" />
                 </button>
                 
                 {showPeriodDropdown && (
@@ -634,13 +637,13 @@ export default function Dashboard({
               </div>
             </div>
             
-            <p className="text-[12px] text-[#88888A] font-medium leading-normal">
+            <p className="text-[10px] sm:text-[12px] text-[#88888A] font-medium leading-normal">
               Monthly sum of total invoices generated ({currencyCode} Equivalent baseline)
             </p>
           </div>
 
           {/* SVG representation of beautifully curved line chart */}
-          <div className="h-[210px] w-full relative mt-6 overflow-hidden">
+          <div className="h-[160px] sm:h-[210px] w-full relative mt-4 sm:mt-6 overflow-hidden">
             <svg viewBox="0 0 600 200" className="w-full h-full text-neutral-500 overflow-visible">
               <defs>
                 <linearGradient id="curve-gradient-accent" x1="0" y1="0" x2="0" y2="1">
@@ -879,17 +882,17 @@ export default function Dashboard({
         </div>
 
         {/* Payment speed sidebar card listing */}
-        <div className="border border-[#EBEBEB] dark:border-[#1F1F1F] rounded-[12px] bg-white dark:bg-[#111111] p-[24px] flex flex-col justify-between">
+        <div className="border border-[#EBEBEB] dark:border-[#1F1F1F] rounded-[12px] bg-white dark:bg-[#111111] p-4 sm:p-5 md:p-6 flex flex-col justify-between">
           <div>
             {/* Header above the rows */}
             <div className="flex flex-col mb-4">
-              <div className="flex items-center justify-between">
-                <span className="text-[14px] font-semibold text-[#0A0A0A] dark:text-[#F5F5F5] font-sans">
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-base sm:text-[14px] font-semibold text-[#0A0A0A] dark:text-[#F5F5F5] font-sans">
                   Payment Velocity
                 </span>
-                <Info size={14} className="text-[#9B9B9B] dark:text-[#555555]" />
+                <Info size={14} className="text-[#9B9B9B] dark:text-[#555555] flex-shrink-0" />
               </div>
-              <span className="text-[12px] text-[#9B9B9B] dark:text-[#555555] font-sans mt-[2px]">
+              <span className="text-xs sm:text-[12px] text-[#9B9B9B] dark:text-[#555555] font-sans mt-[2px]">
                 Avg. days from sent to paid
               </span>
               <div className="h-[1px] bg-[#EBEBEB] dark:bg-[#1F1F1F] mt-3" />
@@ -911,29 +914,29 @@ export default function Dashboard({
                 return (
                   <div 
                     key={idx} 
-                    className="flex items-center justify-between min-h-[56px] py-1 border-b border-[#EBEBEB] dark:border-[#1A1A1A] last:border-b-0"
+                    className="flex items-center justify-between min-h-[48px] sm:min-h-[56px] py-2 border-b border-[#EBEBEB] dark:border-[#1A1A1A] last:border-b-0 gap-2"
                   >
-                    <div className="flex flex-col">
-                      <span className="text-[14px] font-medium text-[#0A0A0A] dark:text-[#F5F5F5] font-sans leading-snug">
+                    <div className="flex flex-col min-w-0">
+                      <span className="text-sm sm:text-[14px] font-medium text-[#0A0A0A] dark:text-[#F5F5F5] font-sans leading-snug truncate">
                         {cs.client.name}
                       </span>
-                      <span className="text-[12px] font-mono text-[#555555] dark:text-[#888888] mt-0.5 leading-none">
-                        Billed: {formatCurrencyValue(cs.totalBilled, cs.client.defaultCurrency)}
+                      <span className="text-xs sm:text-[12px] font-mono text-[#555555] dark:text-[#888888] mt-0.5 leading-none truncate">
+                        {formatCurrencyValue(cs.totalBilled, cs.client.defaultCurrency)}
                       </span>
                     </div>
 
-                    <div className="flex items-center gap-2.5">
+                    <div className="flex items-center gap-1.5 sm:gap-2.5 flex-shrink-0">
                       {/* Speed badge */}
-                      <div className={`inline-flex items-center justify-center h-[20px] px-2 rounded-full text-[11px] font-medium border ${badge.className}`}>
+                      <div className={`inline-flex items-center justify-center h-[18px] sm:h-[20px] px-1.5 sm:px-2 rounded-full text-[10px] sm:text-[11px] font-medium border whitespace-nowrap ${badge.className}`}>
                         {badge.label}
                       </div>
 
                       {/* Days info (right-aligned inside this container) */}
-                      <div className="flex flex-col items-end justify-center">
-                        <span className="font-mono text-[20px] font-semibold text-[#0A0A0A] dark:text-[#F5F5F5] leading-none">
+                      <div className="flex flex-col items-end justify-center flex-shrink-0">
+                        <span className="font-mono text-lg sm:text-[20px] font-semibold text-[#0A0A0A] dark:text-[#F5F5F5] leading-none">
                           {cs.avgDays}
                         </span>
-                        <span className="text-[11px] text-[#555555] dark:text-[#888888] font-sans mt-1 leading-none">
+                        <span className="text-[10px] sm:text-[11px] text-[#555555] dark:text-[#888888] font-sans mt-0.5 leading-none">
                           days
                         </span>
                       </div>

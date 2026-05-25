@@ -216,33 +216,34 @@ ${invoice.from.email}`;
   };
 
   return (
-    <div className="flex flex-col gap-6 select-none relative font-sans text-left">
+    <div className="flex flex-col gap-4 sm:gap-6 select-none relative font-sans text-left">
       
       {/* Banner / Header details */}
-      <header className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-4 border-b border-[#EBEBEB] dark:border-[#1E1E1E]">
-        <div className="flex items-center gap-3">
+      <header className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 pb-3 sm:pb-4 border-b border-[#EBEBEB] dark:border-[#1E1E1E]">
+        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
           <button
             onClick={onBackToDashboard}
-            className="p-1 text-[#6B6B6B] dark:text-[#888888] hover:text-[#0A0A0A] dark:hover:text-[#F5F5F5] bg-white dark:bg-[#111111] border border-[#EBEBEB] dark:border-[#1E1E1E] rounded-md transition-fides cursor-pointer"
+            className="p-1.5 sm:p-1 text-[#6B6B6B] dark:text-[#888888] hover:text-[#0A0A0A] dark:hover:text-[#F5F5F5] bg-white dark:bg-[#111111] border border-[#EBEBEB] dark:border-[#1E1E1E] rounded-md transition-fides cursor-pointer h-9 w-9 sm:h-8 sm:w-8 flex items-center justify-center flex-shrink-0"
           >
-            <ArrowLeft size={14} />
+            <ArrowLeft size={16} className="sm:hidden" />
+            <ArrowLeft size={14} className="hidden sm:block" />
           </button>
-          <div className="flex flex-col">
-            <div className="flex items-center gap-2">
-              <span className="text-xs text-[#9B9B9B] dark:text-[#555555]">Invoices</span>
+          <div className="flex flex-col min-w-0">
+            <div className="flex items-center gap-2 min-w-0 overflow-x-auto">
+              <span className="text-xs text-[#9B9B9B] dark:text-[#555555] whitespace-nowrap">Invoices</span>
               <span className="text-xs text-neutral-300">/</span>
-              <span className="text-xs font-semibold text-primary">
+              <span className="text-xs font-semibold text-primary truncate">
                 {invoice.number}
               </span>
             </div>
             
-            <div className="flex items-center gap-2 mt-0.5">
-              <h1 className="text-lg font-bold tracking-tight text-neutral-950 dark:text-white leading-tight">
+            <div className="flex items-center gap-2 mt-0.5 flex-wrap">
+              <h1 className="text-base sm:text-lg font-bold tracking-tight text-neutral-950 dark:text-white leading-tight">
                 Invoice overview
               </h1>
               
               {/* Dynamic Status Badges */}
-              <span className={`px-2 py-0.5 text-[10px] font-semibold tracking-tight rounded bg-emerald-50 dark:bg-emerald-950/20 text-emerald-500 border border-emerald-100 dark:border-emerald-950/40 select-none lowercase italic text-center text-body`}>
+              <span className={`px-2 py-0.5 text-[10px] font-semibold tracking-tight rounded bg-emerald-50 dark:bg-emerald-950/20 text-emerald-500 border border-emerald-100 dark:border-emerald-950/40 select-none lowercase italic text-center text-body flex-shrink-0`}>
                 {invoice.status}
               </span>
             </div>
@@ -250,57 +251,65 @@ ${invoice.from.email}`;
         </div>
 
         {/* Action Panel items */}
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-1.5 sm:gap-2 w-full sm:w-auto">
           {invoice.status === 'draft' && (
             <button
               onClick={() => onEditInvoice(invoice)}
-              className="h-8 px-3.5 bg-neutral-50 hover:bg-neutral-100 dark:bg-[#1E1E1E] dark:hover:bg-[#2A2A2A] border border-[#EBEBEB] dark:border-[#1E1E1E] text-primary text-xs font-semibold rounded-md transition-fides flex items-center gap-1.5 cursor-pointer"
+              className="h-9 sm:h-8 px-2.5 sm:px-3.5 bg-neutral-50 hover:bg-neutral-100 dark:bg-[#1E1E1E] dark:hover:bg-[#2A2A2A] border border-[#EBEBEB] dark:border-[#1E1E1E] text-primary text-xs font-semibold rounded-md transition-fides flex items-center gap-1.5 cursor-pointer text-center flex-1 sm:flex-none justify-center"
             >
-              <span>Edit invoice</span>
+              <span className="hidden sm:inline">Edit</span>
+              <span className="sm:hidden">Edit invoice</span>
             </button>
           )}
 
           <button
             onClick={() => setShowSendModal(true)}
-            className="h-8 px-3.5 bg-neutral-50 hover:bg-neutral-100 dark:bg-[#1E1E1E] dark:hover:bg-[#2A2A2A] border border-[#EBEBEB] dark:border-[#1E1E1E] text-primary text-xs font-semibold rounded-md transition-fides flex items-center gap-1.5 cursor-pointer"
+            className="h-9 sm:h-8 px-2.5 sm:px-3.5 bg-neutral-50 hover:bg-neutral-100 dark:bg-[#1E1E1E] dark:hover:bg-[#2A2A2A] border border-[#EBEBEB] dark:border-[#1E1E1E] text-primary text-xs font-semibold rounded-md transition-fides flex items-center gap-1.5 cursor-pointer text-center flex-1 sm:flex-none justify-center"
           >
-            <Send size={12} />
-            <span>Share or Send</span>
+            <Send size={14} className="sm:hidden" />
+            <Send size={12} className="hidden sm:block" />
+            <span className="hidden sm:inline">Share</span>
+            <span className="sm:hidden">Send</span>
           </button>
 
           {invoice.status !== 'paid' && invoice.status !== 'void' && (
             <button
               onClick={() => setShowPaymentModal(true)}
-              className="h-8 px-4 bg-orange-500 hover:bg-orange-600 text-white text-xs font-semibold rounded-md transition-fides flex items-center gap-1.5 cursor-pointer shadow-hidden"
+              className="h-9 sm:h-8 px-2.5 sm:px-4 bg-orange-500 hover:bg-orange-600 text-white text-xs font-semibold rounded-md transition-fides flex items-center gap-1.5 cursor-pointer shadow-hidden text-center flex-1 sm:flex-none justify-center"
             >
-              <CreditCard size={12} />
-              <span>Record Payment</span>
+              <CreditCard size={14} className="sm:hidden" />
+              <CreditCard size={12} className="hidden sm:block" />
+              <span className="hidden sm:inline">Pay</span>
+              <span className="sm:hidden">Payment</span>
             </button>
           )}
 
           <button
             onClick={handleNativePrint}
-            className="h-8 px-3.5 bg-neutral-50 hover:bg-neutral-100 dark:bg-[#1E1E1E] dark:hover:bg-[#2A2A2A] border border-[#EBEBEB] dark:border-[#1E1E1E] text-primary text-xs font-semibold rounded-md transition-fides flex items-center gap-1.5 cursor-pointer"
+            className="h-9 sm:h-8 px-2.5 sm:px-3.5 bg-neutral-50 hover:bg-neutral-100 dark:bg-[#1E1E1E] dark:hover:bg-[#2A2A2A] border border-[#EBEBEB] dark:border-[#1E1E1E] text-primary text-xs font-semibold rounded-md transition-fides flex items-center gap-1.5 cursor-pointer text-center flex-1 sm:flex-none justify-center"
           >
-            <Printer size={12} />
-            <span>Print or Download</span>
+            <Printer size={14} className="sm:hidden" />
+            <Printer size={12} className="hidden sm:block" />
+            <span className="hidden sm:inline">Print</span>
+            <span className="sm:hidden">Print/PDF</span>
           </button>
 
           <button
             onClick={() => setShowDeleteConfirm(true)}
-            className="h-8 px-3 text-red-500 hover:bg-red-50 dark:hover:bg-red-950/15 border border-transparent rounded-md transition-fides flex items-center gap-1.5 cursor-pointer"
+            className="h-9 sm:h-8 px-2 sm:px-3 text-red-500 hover:bg-red-50 dark:hover:bg-red-950/15 border border-transparent rounded-md transition-fides flex items-center gap-1.5 cursor-pointer"
             title="Delete invoice"
           >
-            <Trash2 size={13} />
+            <Trash2 size={14} className="sm:hidden" />
+            <Trash2 size={13} className="hidden sm:block" />
           </button>
         </div>
       </header>
 
       {/* Main Details Grid splits Preview Document & Activity Panel */}
-      <section className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+      <section className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
         
         {/* Document Render view area (Left Span) */}
-        <div className="xl:col-span-2 flex flex-col items-center bg-neutral-50/50 dark:bg-[#070707]/30 border border-[#EBEBEB] dark:border-[#1E1E1E] rounded-xl p-4 sm:p-8 overflow-x-auto min-h-[920px]">
+        <div className="lg:col-span-2 flex flex-col items-center bg-neutral-50/50 dark:bg-[#070707]/30 border border-[#EBEBEB] dark:border-[#1E1E1E] rounded-xl p-3 sm:p-6 lg:p-8 overflow-x-auto min-h-[500px] sm:min-h-[600px] lg:min-h-[920px]">
           <div className="w-full max-w-[794px] border border-neutral-100 dark:border-neutral-900 rounded-md shadow-none flex items-center justify-center overflow-hidden">
             <InvoiceTemplateRenderer data={invoice} isReceipt={invoice.status === 'paid'} />
           </div>
